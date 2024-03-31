@@ -26,7 +26,15 @@ ul,
 ol {
   list-style: none;
 }
-
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 .page {
   display: flex;
   align-items: center;
@@ -55,34 +63,20 @@ ol {
 
 .result__video-container {
   position: relative;
-  width: 711px;
-  height: 386px;
+  inline-size: 711px;
+  block-size: 386px;
 }
 
 .result__video {
-  width: inherit;
-  height: inherit;
+  inline-size: inherit;
+  block-size: inherit;
   object-fit: cover;
+  object-position: center;
 }
 
 .search-form {
   display: flex;
   justify-content: space-between;
-}
-
-.search-form__textfield {
-  font-family: "Fira Sans Condensed", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  text-align: start;
-  width: 224px;
-  color: #fff;
-  background: none;
-  outline: none;
-  border: none;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  appearance: none;
 }
 
 .search-form__fieldset-title {
@@ -95,16 +89,7 @@ ol {
   gap: 5px;
   align-items: center;
   cursor: pointer;
-}
-
-.visually-hidden {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
+  width: fit-content;
 }
 
 .search-form__label:has(:focus-visible) {
@@ -115,12 +100,38 @@ ol {
 .search-form__label:hover .search-form__label-text {
   text-decoration: underline;
 }
+.search-form__textfield {
+  width: 225px;
+  height: 27px;
+  border: none;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  appearance: none;
+}
+.search-form__label:has(:active) {
+  outline: none;
+}
+
+.search-form__textfield:active {
+  border-right: 1px solid #fff;
+  border-left: 1px solid #fff;
+}
+.search-form__textfield:focus {
+  outline: none;
+}
+.search-form__textfield:focus-visible {
+  outline: none;
+}
 
 .search-form__fieldset {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: fit-content;
+  inline-size: fit-content;
   border: none;
 }
 
@@ -130,8 +141,8 @@ ol {
 }
 
 .search-form__pseudo-checkbox {
-  width: 19px;
-  height: 19px;
+  inline-size: 19px;
+  block-size: 19px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,18 +152,18 @@ ol {
 .search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
   content: "";
   display: block;
-  width: 15px;
-  height: 15px;
+  inline-size: 15px;
+  block-size: 15px;
   background-color: white;
 }
 
 .search-form__submit-button {
   align-self: flex-end;
-  width: 190px;
+  inline-size: 190px;
 }
 
 .content__details {
-  width: 399px;
+  inline-size: 399px;
   display: flex;
   flex-direction: column;
   gap: 21px;
@@ -173,12 +184,12 @@ ol {
 
 .content__list {
   position: relative;
-  height: 300px;
+  block-size: 300px;
   overflow-y: auto;
 }
 
 .content__list-item:not(:last-child) {
-  margin-bottom: 30px;
+  margin-block-end: 30px;
 }
 
 .content__card-link {
@@ -204,13 +215,13 @@ ol {
   background: #545050;
 }
 
-.content__card-link:hover .content__video-card-title,
-.content__card-link:hover .content__video-card-description {
+.content__card-link:hover {
   text-decoration: underline;
 }
 
 .content__video-card {
   display: flex;
+  justify-content: space-between;
 }
 
 .content__video-card-description-container {
@@ -226,20 +237,24 @@ ol {
   font-size: 30px;
   font-weight: 700;
   line-height: 100%;
+  max-width: 200px;
   text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  overflow: hidden;
 }
 
 .content__video-card-description {
+  max-width: 200px;
   font-weight: 400;
   line-height: 90%;
 }
 
 .content__video-card-thumbnail {
-  width: 194px;
-  height: 103px;
-  margin-left: auto;
-  object-position: 50% 50%;
+  inline-size: 194px;
+  block-size: 103px;
   object-fit: cover;
+  object-position: center;
 }
 
 .button {
@@ -251,10 +266,6 @@ ol {
   background: none;
   border: 1px solid currentColor;
   cursor: pointer;
-}
-
-.more-button {
-  width: 100%;
 }
 
 .button:focus {
@@ -272,4 +283,8 @@ ol {
 
 .button:hover {
   text-decoration: underline;
+}
+
+.more-button {
+  width: 100%;
 }
